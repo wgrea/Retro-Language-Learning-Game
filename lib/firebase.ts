@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
+import { getAuth, Auth } from 'firebase/auth';
+import { getFirestore, Firestore } from 'firebase/firestore';
 
 // Check if we're in a browser environment and have the required config
 const hasFirebaseConfig = typeof window !== 'undefined' && 
@@ -18,8 +18,8 @@ const firebaseConfig = {
 
 // Only initialize Firebase if we have valid config or we're in development
 let app;
-let auth;
-let db;
+let auth: Auth | null;
+let db: Firestore | null;
 
 if (hasFirebaseConfig || process.env.NODE_ENV === 'development') {
   try {

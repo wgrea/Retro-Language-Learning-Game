@@ -1,3 +1,5 @@
+// app/page.tsx
+
 'use client';
 
 import { useState } from 'react';
@@ -7,7 +9,7 @@ import { GameArea } from '@/components/GameArea';
 import { AuthModal } from '@/components/AuthModal';
 import { GameOverModal } from '@/components/GameOverModal';
 import { Button } from '@/components/ui/button';
-import { Home, Pause, Play } from 'lucide-react';
+import { Home as HomeIcon, Pause, Play } from 'lucide-react';
 import { useGameStats } from '@/hooks/useGameStats';
 import { DifficultyMode, difficultySettings } from '@/lib/translations';
 
@@ -104,7 +106,7 @@ export default function Home() {
             variant="outline"
             className="retro-button"
           >
-            <Home className="w-4 h-4" />
+            <HomeIcon className="w-4 h-4" />
           </Button>
         </div>
         
@@ -124,7 +126,7 @@ export default function Home() {
                   Resume
                 </Button>
                 <Button onClick={handleBackToMenu} variant="outline" className="retro-button">
-                  <Home className="w-4 h-4 mr-2" />
+                  <HomeIcon className="w-4 h-4 mr-2" />
                   Menu
                 </Button>
               </div>

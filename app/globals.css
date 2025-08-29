@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+  --neon-green: #00FF41;
+  --neon-blue: #0099FF;
+  --neon-pink: #FF0080;
+  --dark-space: #0a0a0f;
+  --dark-purple: #1a0b2e;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+@layer base {
+  :root {
+    --background: 220 13% 5%;
+    --foreground: 0 0% 98%;
+    --card: 220 13% 5%;
+    --card-foreground: 0 0% 98%;
+    --popover: 220 13% 5%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 142 100% 50%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 210 100% 50%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 220 13% 15%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 330 100% 50%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 220 13% 15%;
+    --input: 220 13% 15%;
+    --ring: 142 100% 50%;
+    --chart-1: 142 100% 50%;
+    --chart-2: 210 100% 50%;
+    --chart-3: 330 100% 50%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.125rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Press Start 2P', monospace;
+    background: linear-gradient(135deg, var(--dark-space) 0%, var(--dark-purple) 100%);
+    min-height: 100vh;
+  }
+}
+
+@layer components {
+  .pixel-border {
+    border: 2px solid;
+    border-image: linear-gradient(45deg, var(--neon-green), var(--neon-blue), var(--neon-pink)) 1;
+    position: relative;
+  }
+  
+  .pixel-border::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(45deg, var(--neon-green), var(--neon-blue), var(--neon-pink));
+    border-radius: inherit;
+    z-index: -1;
+    opacity: 0.3;
+    filter: blur(4px);
+  }
+  
+  .neon-glow {
+    text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
+  }
+  
+  .game-pixel {
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+  }
+  
+  .retro-button {
+    @apply px-4 py-2 bg-primary text-primary-foreground border-2 border-primary;
+    @apply hover:bg-primary/80 hover:shadow-lg hover:shadow-primary/50;
+    @apply active:scale-95 transition-all duration-100;
+    @apply font-bold text-xs uppercase tracking-wider;
+  }
+  
+  .falling-word {
+    @apply absolute px-3 py-1 text-xs font-bold rounded-sm;
+    @apply bg-accent text-accent-foreground border border-accent;
+    @apply shadow-lg shadow-accent/50;
+    animation: fall linear infinite;
+  }
+  
+  @keyframes fall {
+    from {
+      transform: translateY(-100vh);
+    }
+    to {
+      transform: translateY(100vh);
+    }
+  }
+  
+  .particle {
+    @apply absolute w-1 h-1 rounded-full;
+    animation: particle-explosion 0.5s ease-out forwards;
+  }
+  
+  @keyframes particle-explosion {
+    0% {
+      transform: scale(1) translate(0, 0);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(0) translate(var(--random-x), var(--random-y));
+      opacity: 0;
+    }
+  }
+  
+  .stars {
+    background-image: 
+      radial-gradient(2px 2px at 20px 30px, #eee, transparent),
+      radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.8), transparent),
+      radial-gradient(1px 1px at 90px 40px, #fff, transparent),
+      radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.6), transparent),
+      radial-gradient(2px 2px at 160px 30px, #ddd, transparent);
+    background-repeat: repeat;
+    background-size: 200px 100px;
+    animation: sparkle 20s linear infinite;
+  }
+  
+  @keyframes sparkle {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-200px);
+    }
+  }
+}
